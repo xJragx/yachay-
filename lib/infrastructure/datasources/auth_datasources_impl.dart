@@ -38,7 +38,7 @@ class AuthDataSourceImpl implements AuthDataSource {
               Options(headers: {"authorization": "Bearer $token"}));
 
       final user = UserMapper.userJsonToEntity(userResponse.data);
-
+      print(user);
       return user;
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {
