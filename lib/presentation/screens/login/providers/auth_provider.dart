@@ -23,14 +23,16 @@ class AuthNotifier extends StateNotifier<AuthState> {
   AuthNotifier(
       {required this.keyValueStorageService,
       required this.authRepository})
-      : super(AuthState());
+      : super(AuthState()) {
+    checkAuthStatus();
+  }
 
   Future<void> loginUser(String email, String password) async {
     await Future.delayed(const Duration(milliseconds: 500));
 
     try {
-      final user = await authRepository.login(email, password);
-      _setLoggedUser(user);
+      final token = await authRepository.login(email, password);
+      _setLoggedUser(token);
     } on WrongCredentials {
       logout('Credenciales no son correctas');
     } on ConnectionTimeout {
@@ -45,41 +47,54 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   void registerUser(String email, String password) async {}
-  void checkAuthUser() async {}
+  void checkAuthStatus() async {
+    final token =
+        await keyValueStorageService.getValue<String>('token');
+    if (token == null) return logout();
 
-  void _setLoggedUser(User user) {
+    try {
+      final token1 = await authRepository.checkAuthStatus('token');
+      _setLoggedUser(token1);
+    } catch (e) {
+      logout();
+    }
+  }
+
+  void _setLoggedUser(Token token) async {
+    await keyValueStorageService.setKeyValue('token', token.token);
     state = state.copyWith(
       authStatus: AuthStatus.authenticated,
-      user: user,
+      token: token,
       errorMessage: '',
     );
   }
 
-  Future<void> logout(String? errorMessage) async {
+  Future<void> logout([String? errorMessage]) async {
+    await keyValueStorageService.removeKey('token');
     state = state.copyWith(
-      authStatus: AuthStatus.noAuthenticated,
-      user: null,
+      authStatus: AuthStatus.notAuthenticated,
+      token: null,
       errorMessage: errorMessage,
     );
   }
 }
 
-enum AuthStatus { checking, authenticated, noAuthenticated }
+enum AuthStatus { checking, authenticated, notAuthenticated }
 
 class AuthState {
   final AuthStatus authStatus;
-  final User? user;
+  final Token? token;
   final String errorMessage;
 
   AuthState(
       {this.authStatus = AuthStatus.checking,
-      this.user,
+      this.token,
       this.errorMessage = ''});
   AuthState copyWith(
-      {AuthStatus? authStatus, User? user, String? errorMessage}) {
+      {AuthStatus? authStatus, Token? token, String? errorMessage}) {
     return AuthState(
         authStatus: authStatus ?? this.authStatus,
-        user: user ?? this.user,
+        token: token ?? this.token,
         errorMessage: errorMessage ?? this.errorMessage);
   }
 }

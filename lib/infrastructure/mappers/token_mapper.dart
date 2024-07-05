@@ -1,5 +1,7 @@
+import 'package:aprendiendoflutter/domain/domain.dart';
+
 class TokenMapper {
-  static String userJsonToEntity(Map<String, dynamic> json) {
-    return json['access_token'];
-  }
+  static Token userJsonToEntity(Map<String, dynamic> json) => Token(
+        token: json['access_token'],
+      );
 }

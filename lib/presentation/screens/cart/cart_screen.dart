@@ -13,6 +13,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 30, 30, 44),
       appBar: AppBar(
@@ -32,15 +33,6 @@ class _CartScreenState extends State<CartScreen> {
             vertical: 30.0,
           ),
           children: [
-            const Align(
-              alignment: Alignment.topLeft,
-              child: Text('Carrito de Compras',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold)),
-            ),
-            SizedBox(height: 20.0),
             const Column(
               children: [
                 Row(
@@ -54,8 +46,8 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(width: 10.0),
                     Expanded(
                       child: Column(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment:
+                            CrossAxisAlignment.stretch,
                         children: [
                           Text(
                             'Adobe Illustrator Desde cero hasta intermedio',
@@ -65,6 +57,7 @@ class _CartScreenState extends State<CartScreen> {
                               color: Colors.white,
                             ),
                           ),
+                          SizedBox(height: 20.0),
                           Row(
                             mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
@@ -92,7 +85,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 20.0),
                 Row(
                   children: <Widget>[
                     Image(
@@ -104,8 +97,8 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(width: 10.0),
                     Expanded(
                       child: Column(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment:
+                            CrossAxisAlignment.stretch,
                         children: [
                           Text(
                             'Adobe Illustrator Desde cero hasta intermedio',
@@ -115,6 +108,7 @@ class _CartScreenState extends State<CartScreen> {
                               color: Colors.white,
                             ),
                           ),
+                          SizedBox(height: 20.0),
                           Row(
                             mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
@@ -142,7 +136,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 20.0),
                 Row(
                   children: <Widget>[
                     Image(
@@ -154,8 +148,8 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(width: 10.0),
                     Expanded(
                       child: Column(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment:
+                            CrossAxisAlignment.stretch,
                         children: [
                           Text(
                             'Adobe Illustrator Desde cero hasta intermedio',
@@ -165,6 +159,7 @@ class _CartScreenState extends State<CartScreen> {
                               color: Colors.white,
                             ),
                           ),
+                          SizedBox(height: 20.0),
                           Row(
                             mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
@@ -192,7 +187,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 20.0),
                 Row(
                   children: <Widget>[
                     Image(
@@ -204,8 +199,8 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(width: 10.0),
                     Expanded(
                       child: Column(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment:
+                            CrossAxisAlignment.stretch,
                         children: [
                           Text(
                             'Adobe Illustrator Desde cero hasta intermedio',
@@ -215,6 +210,7 @@ class _CartScreenState extends State<CartScreen> {
                               color: Colors.white,
                             ),
                           ),
+                          SizedBox(height: 20.0),
                           Row(
                             mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
@@ -242,7 +238,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 20.0),
                 Row(
                   children: <Widget>[
                     Image(
@@ -254,8 +250,8 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(width: 10.0),
                     Expanded(
                       child: Column(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment:
+                            CrossAxisAlignment.stretch,
                         children: [
                           Text(
                             'Adobe Illustrator Desde cero hasta intermedio',
@@ -265,6 +261,7 @@ class _CartScreenState extends State<CartScreen> {
                               color: Colors.white,
                             ),
                           ),
+                          SizedBox(height: 20.0),
                           Row(
                             mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
@@ -281,7 +278,7 @@ class _CartScreenState extends State<CartScreen> {
                                 "S/ 50.00",
                                 style: TextStyle(
                                   fontSize: 12.0,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.bold,
                                   color: Color(0xFFFF6A55),
                                 ),
                               )
@@ -328,18 +325,23 @@ class _CartScreenState extends State<CartScreen> {
             ),
             const SizedBox(height: 20.0),
             Center(
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(189, 36), // Tamaño del botón
-                ),
-                onPressed: () {
-                  // Acción al presionar el botón
-                },
-                icon:
-                    const Icon(Icons.credit_card), // Icono de tarjeta
-                label: const Text('Ir a pagar'), // Texto del botón
+                child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: colors.primary,
+                minimumSize: const Size(189, 36), // Tamaño del botón
               ),
-            )
+              onPressed: () {
+                // Acción al presionar el botón
+              },
+              icon: const Icon(Icons.credit_card), // Icono de tarjeta
+              label: const Text(
+                'Ir a pagar',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ), // Texto del botón
+              ),
+            )),
           ]),
     );
   }

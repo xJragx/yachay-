@@ -20,7 +20,7 @@ class _CursosListState extends State<CursosList> {
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
-          child: Container(
+          child: SizedBox(
             width: 300,
             child: TextField(
               cursorColor: Colors.green,

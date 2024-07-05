@@ -7,6 +7,7 @@ class PerfilAlumno extends StatefulWidget {
     super.key,
   });
 
+  @override
   State<PerfilAlumno> createState() => _PerfilAlumnoState();
 }
 
@@ -41,9 +42,8 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
           _profileImageUrl = pickedFile.path;
         });
       }
-    } catch (e) {
-      print("Error picking image: $e");
-    }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   void _deleteImage() {
@@ -51,7 +51,8 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('¿Está seguro que desea eliminar su foto?'),
+          title:
+              const Text('¿Está seguro que desea eliminar su foto?'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -61,13 +62,13 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                 });
                 Navigator.of(context).pop();
               },
-              child: Text('Sí'),
+              child: const Text('Sí'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('No'),
+              child: const Text('No'),
             ),
           ],
         );
@@ -92,7 +93,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
               fontFamily: 'ABeeZee',
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: TextField(
               controller: controller,
@@ -104,18 +105,19 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
               ),
               decoration: InputDecoration(
                 filled: true,
-                fillColor:
-                    _isDarkMode ? Color(0xFF343646) : Colors.white,
+                fillColor: _isDarkMode
+                    ? const Color(0xFF343646)
+                    : Colors.white,
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: isEditable
-                        ? Color(0xff2a2c3e)
+                        ? const Color(0xff2a2c3e)
                         : Colors.transparent,
                   ),
                 ),
                 isDense: true,
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 8, horizontal: 10),
               ),
               onTap: () {
                 if (isEditable) {
@@ -125,7 +127,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
               },
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           ElevatedButton(
             onPressed: () {
               setState(() {
@@ -133,10 +135,11 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
               });
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  _isDarkMode ? Color(0xFF272A3C) : Colors.white,
-              textStyle:
-                  TextStyle(fontSize: 12, fontFamily: 'ABeeZee'),
+              backgroundColor: _isDarkMode
+                  ? const Color(0xFF272A3C)
+                  : Colors.white,
+              textStyle: const TextStyle(
+                  fontSize: 12, fontFamily: 'ABeeZee'),
             ),
             child: Text(isEditable ? 'Guardar' : 'Editar'),
           ),
@@ -148,17 +151,19 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _isDarkMode ? Color(0xFF1E1E2C) : Colors.white,
+      backgroundColor:
+          _isDarkMode ? const Color(0xFF1E1E2C) : Colors.white,
       appBar: AppBar(
         title: Text(
           'Perfil',
           style: TextStyle(
-            color: _isDarkMode ? Colors.white : Color(0xFF1E1E2C),
+            color:
+                _isDarkMode ? Colors.white : const Color(0xFF1E1E2C),
             fontFamily: 'ABeeZee',
           ),
         ),
         backgroundColor:
-            _isDarkMode ? Color(0xFF1E1E2C) : Colors.white,
+            _isDarkMode ? const Color(0xFF1E1E2C) : Colors.white,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -171,35 +176,37 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                   backgroundImage: NetworkImage(_profileImageUrl),
                   radius: 38.5,
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Column(
                   children: [
                     ElevatedButton(
                       onPressed: _pickImage,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _isDarkMode
-                            ? Color(0xFF272A3C)
+                            ? const Color(0xFF272A3C)
                             : Colors.white,
-                        textStyle: TextStyle(fontFamily: 'ABeeZee'),
+                        textStyle:
+                            const TextStyle(fontFamily: 'ABeeZee'),
                       ),
-                      child: Text('Cambiar foto'),
+                      child: const Text('Cambiar foto'),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     ElevatedButton(
                       onPressed: _deleteImage,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _isDarkMode
-                            ? Color(0xFF272A3C)
+                            ? const Color(0xFF272A3C)
                             : Colors.white,
-                        textStyle: TextStyle(fontFamily: 'ABeeZee'),
+                        textStyle:
+                            const TextStyle(fontFamily: 'ABeeZee'),
                       ),
-                      child: Text('Eliminar foto'),
+                      child: const Text('Eliminar foto'),
                     ),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildEditableField(
               labelText: 'Nombre:',
               controller: _nameController,
@@ -230,8 +237,8 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                 });
               },
             ),
-            Divider(color: Color(0xFF343646), thickness: 2),
-            SizedBox(height: 16),
+            const Divider(color: Color(0xFF343646), thickness: 2),
+            const SizedBox(height: 16),
             Text(
               'Datos adicionales',
               style: TextStyle(
@@ -240,8 +247,8 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                 fontFamily: 'ABeeZee',
               ),
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               'Llenar estos campos no es obligatorio, sin embargo, te pueden ayudar a personalizar los resultados que te muestra la plataforma y aumentar la seguridad de tu cuenta.',
               style: TextStyle(
                 fontSize: 11,
@@ -249,7 +256,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                 fontFamily: 'ABeeZee',
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
@@ -263,7 +270,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                       fontFamily: 'ABeeZee',
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: TextField(
                       controller: TextEditingController(
@@ -279,11 +286,11 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: _isDarkMode
-                            ? Color(0xFF343646)
+                            ? const Color(0xFF343646)
                             : Colors.white,
-                        border: OutlineInputBorder(),
+                        border: const OutlineInputBorder(),
                         isDense: true,
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                             vertical: 8, horizontal: 10),
                       ),
                     ),
@@ -312,8 +319,8 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                 });
               },
             ),
-            Divider(color: Color(0xFF343646), thickness: 2),
-            SizedBox(height: 16),
+            const Divider(color: Color(0xFF343646), thickness: 2),
+            const SizedBox(height: 16),
             Text(
               'Tema de la aplicación',
               style: TextStyle(
@@ -322,7 +329,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                 fontFamily: 'ABeeZee',
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
               children: [
                 Text(
@@ -333,7 +340,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                     fontFamily: 'ABeeZee',
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Switch(
                   value: _isDarkMode,
                   onChanged: (value) {
@@ -341,53 +348,57 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                       _isDarkMode = value;
                       if (!_isDarkMode) {
                         // Cambia a color de fondo blanco cuando se desactiva el modo oscuro
-                        _nameController
-                          ..value = TextEditingValue(
-                            text: _nameController.text,
-                            selection: TextSelection.collapsed(
-                                offset: _nameController.text.length),
-                          );
-                        _surnameController
-                          ..value = TextEditingValue(
-                            text: _surnameController.text,
-                            selection: TextSelection.collapsed(
-                                offset:
-                                    _surnameController.text.length),
-                          );
-                        _emailController
-                          ..value = TextEditingValue(
-                            text: _emailController.text,
-                            selection: TextSelection.collapsed(
-                                offset: _emailController.text.length),
-                          );
-                        _phoneController
-                          ..value = TextEditingValue(
-                            text: _phoneController.text,
-                            selection: TextSelection.collapsed(
-                                offset: _phoneController.text.length),
-                          );
-                        _recoveryEmailController
-                          ..value = TextEditingValue(
-                            text: _recoveryEmailController.text,
-                            selection: TextSelection.collapsed(
-                                offset: _recoveryEmailController
-                                    .text.length),
-                          );
+                        _nameController.value = TextEditingValue(
+                          text: _nameController.text,
+                          selection: TextSelection.collapsed(
+                              offset: _nameController.text.length),
+                        );
+                        _surnameController.value = TextEditingValue(
+                          text: _surnameController.text,
+                          selection: TextSelection.collapsed(
+                              offset: _surnameController.text.length),
+                        );
+                        _emailController.value = TextEditingValue(
+                          text: _emailController.text,
+                          selection: TextSelection.collapsed(
+                              offset: _emailController.text.length),
+                        );
+                        _phoneController.value = TextEditingValue(
+                          text: _phoneController.text,
+                          selection: TextSelection.collapsed(
+                              offset: _phoneController.text.length),
+                        );
+                        _recoveryEmailController.value =
+                            TextEditingValue(
+                          text: _recoveryEmailController.text,
+                          selection: TextSelection.collapsed(
+                              offset: _recoveryEmailController
+                                  .text.length),
+                        );
                       }
                     });
                   },
-                  activeColor: Color(
+                  activeColor: const Color(
                       0xFF343646), // color del interruptor cuando está activo
-                  inactiveThumbColor: Color.fromARGB(255, 11, 11,
+                  inactiveThumbColor: const Color.fromARGB(
+                      255,
+                      11,
+                      11,
                       20), // color del interruptor cuando está inactivo
-                  activeTrackColor: Color.fromARGB(255, 107, 114,
+                  activeTrackColor: const Color.fromARGB(
+                      255,
+                      107,
+                      114,
                       166), // color de fondo del switch cuando está activo
-                  inactiveTrackColor: Color.fromARGB(255, 255, 255,
+                  inactiveTrackColor: const Color.fromARGB(
+                      255,
+                      255,
+                      255,
                       255), // color del fondo del switch está inactivo
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -395,7 +406,8 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('¿Quiere guardar los cambios?'),
+                        title: const Text(
+                            '¿Quiere guardar los cambios?'),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () {
@@ -408,7 +420,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                               });
                               Navigator.of(context).pop();
                             },
-                            child: Text('Sí'),
+                            child: const Text('Sí'),
                           ),
                           TextButton(
                             onPressed: () {
@@ -432,7 +444,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                               });
                               Navigator.of(context).pop();
                             },
-                            child: Text('No'),
+                            child: const Text('No'),
                           ),
                         ],
                       );
@@ -440,12 +452,13 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      _isDarkMode ? Color(0xFF272A3C) : Colors.white,
-                  textStyle:
-                      TextStyle(fontSize: 14, fontFamily: 'ABeeZee'),
+                  backgroundColor: _isDarkMode
+                      ? const Color(0xFF272A3C)
+                      : Colors.white,
+                  textStyle: const TextStyle(
+                      fontSize: 14, fontFamily: 'ABeeZee'),
                 ),
-                child: Text('Guardar cambios'),
+                child: const Text('Guardar cambios'),
               ),
             ),
           ],

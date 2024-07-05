@@ -23,6 +23,7 @@ class AppTheme {
             'selectedColor must be less than ${colorList.length}');
 
   ThemeData getTheme() => ThemeData(
+        fontFamily: 'Inter',
         useMaterial3: true,
         colorSchemeSeed: colorList[selectedColor],
         appBarTheme: const AppBarTheme(

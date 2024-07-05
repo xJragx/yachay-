@@ -1,25 +1,27 @@
 import 'package:aprendiendoflutter/presentation/screens/home/cursos_list.dart';
+import 'package:aprendiendoflutter/presentation/screens/login/providers/auth_provider.dart';
 import 'package:aprendiendoflutter/presentation/screens/my_courses/presentation/my_courses_screen.dart';
 import 'package:aprendiendoflutter/presentation/screens/perfil/perfil_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   static const String name = 'home_screen';
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends ConsumerState<HomeScreen> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: const Color(0xffe1e1e2c),
+          backgroundColor: const Color(0xFFe1e1e2c),
           appBar: AppBar(
             backgroundColor: const Color(0xff2a2c3e),
             leading: Padding(
@@ -37,15 +39,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: const Icon(
                     Icons.shopping_cart,
-                    color: Color(0xFF6B6D7F),
+                    color: Color(0xFFFFFFFF),
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Icon(
-                  Icons.notifications,
-                  color: Color(0xFF6B6D7F),
+              IconButton(
+                onPressed: () {
+                  context.push('/notification');
+                },
+                icon: const Icon(
+                  Icons.notifications_none_outlined,
+                  color: Color(0xFFFFFFFF),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  ref.read(authProvider.notifier).logout();
+                },
+                icon: const Icon(
+                  Icons.logout,
+                  color: Color(0xFFFFFFFF),
                 ),
               ),
             ],

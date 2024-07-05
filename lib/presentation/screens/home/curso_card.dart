@@ -1,6 +1,7 @@
 import 'package:aprendiendoflutter/domain/entities/curso/curso_model.dart';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CursoCard extends StatelessWidget {
   final Curso curso;
@@ -8,13 +9,9 @@ class CursoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          '/detail',
-          arguments: curso,
-        );
+        context.push('/detail');
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

@@ -87,7 +87,7 @@ class _LoginForm extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Correo electrónico',
+                  'Correo institucional',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14.0,
@@ -98,7 +98,7 @@ class _LoginForm extends ConsumerWidget {
                 TextFormField(
                   onChanged: ref
                       .read(loginFormProvider.notifier)
-                      .onEmailChanged,
+                      .onEmailChange,
                   enableInteractiveSelection: false,
                   autofocus: true,
                   decoration: InputDecoration(
@@ -133,6 +133,9 @@ class _LoginForm extends ConsumerWidget {
                       ),
                       const SizedBox(height: 10),
                       TextFormField(
+                        onFieldSubmitted: (_) => ref
+                            .read(loginFormProvider.notifier)
+                            .onFormSubmit(),
                         onChanged: ref
                             .read(loginFormProvider.notifier)
                             .onPasswordChanged,
@@ -199,16 +202,34 @@ class _LoginForm extends ConsumerWidget {
             SizedBox(
               width: double.infinity,
               child: FilledButton(
-                onPressed: () {
-                  ref.read(loginFormProvider.notifier).onFormSubmit();
-                },
-                child: const Text(
-                  'Iniciar sesión',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14.0,
-                    fontFamily: 'PT Sans',
-                  ),
+                onPressed: loginForm.isPosting
+                    ? null
+                    : ref
+                        .read(loginFormProvider.notifier)
+                        .onFormSubmit,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (loginForm.isPosting)
+                      const SizedBox(
+                        height: 20.0,
+                        width: 20.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
+                        ),
+                      ),
+                    const SizedBox(width: 10.0),
+                    const Text(
+                      'Iniciar sesión',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.0,
+                        fontFamily: 'PT Sans',
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
