@@ -1,18 +1,21 @@
 // ignore_for_file: unused_field
+import 'package:aprendiendoflutter/config/theme/theme_provide.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   static const String name = 'register_screen';
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  ConsumerState<RegisterScreen> createState() =>
+      _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   String _nombre = '';
   String _apellido = '';
   String _email = '';
@@ -22,6 +25,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode =
+        ref.watch(themeNotifierProvider).isDarkMode;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 30, 30, 44),
       body: ListView(

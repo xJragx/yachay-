@@ -1,17 +1,19 @@
+import 'package:aprendiendoflutter/config/theme/theme_provide.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 
-class PerfilAlumno extends StatefulWidget {
+class PerfilAlumno extends ConsumerStatefulWidget {
   const PerfilAlumno({
     super.key,
   });
 
   @override
-  State<PerfilAlumno> createState() => _PerfilAlumnoState();
+  ConsumerState<PerfilAlumno> createState() => _PerfilAlumnoState();
 }
 
-class _PerfilAlumnoState extends State<PerfilAlumno> {
+class _PerfilAlumnoState extends ConsumerState<PerfilAlumno> {
   final ImagePicker _picker = ImagePicker();
   String _profileImageUrl =
       'https://googleflutter.com/sample_image.jpg'; //
@@ -20,7 +22,6 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
   bool _isEmailEditable = false;
   bool _isPhoneEditable = false;
   bool _isRecoveryEmailEditable = false;
-  bool _isDarkMode = true;
 
   final TextEditingController _nameController =
       TextEditingController(text: "NombreAlumno");
@@ -89,7 +90,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
             labelText,
             style: TextStyle(
               fontSize: 13,
-              color: _isDarkMode ? Colors.white : Colors.black,
+              color: Colors.black,
               fontFamily: 'ABeeZee',
             ),
           ),
@@ -100,14 +101,12 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
               enabled: isEditable,
               style: TextStyle(
                 fontSize: 11,
-                color: _isDarkMode ? Colors.white : Colors.black,
+                color: Colors.black,
                 fontFamily: 'ABeeZee',
               ),
               decoration: InputDecoration(
                 filled: true,
-                fillColor: _isDarkMode
-                    ? const Color(0xFF343646)
-                    : Colors.white,
+                fillColor: Colors.white,
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: isEditable
@@ -135,9 +134,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
               });
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: _isDarkMode
-                  ? const Color(0xFF272A3C)
-                  : Colors.white,
+              backgroundColor: Colors.white,
               textStyle: const TextStyle(
                   fontSize: 12, fontFamily: 'ABeeZee'),
             ),
@@ -150,20 +147,23 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode =
+        ref.watch(themeNotifierProvider).isDarkMode;
+
     return Scaffold(
       backgroundColor:
-          _isDarkMode ? const Color(0xFF1E1E2C) : Colors.white,
+          isDarkMode ? const Color(0xFF1E1E2C) : Colors.white,
       appBar: AppBar(
         title: Text(
           'Perfil',
           style: TextStyle(
             color:
-                _isDarkMode ? Colors.white : const Color(0xFF1E1E2C),
+                isDarkMode ? Colors.white : const Color(0xFF1E1E2C),
             fontFamily: 'ABeeZee',
           ),
         ),
         backgroundColor:
-            _isDarkMode ? const Color(0xFF1E1E2C) : Colors.white,
+            isDarkMode ? const Color(0xFF1E1E2C) : Colors.white,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -182,7 +182,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                     ElevatedButton(
                       onPressed: _pickImage,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: _isDarkMode
+                        backgroundColor: isDarkMode
                             ? const Color(0xFF272A3C)
                             : Colors.white,
                         textStyle:
@@ -194,7 +194,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                     ElevatedButton(
                       onPressed: _deleteImage,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: _isDarkMode
+                        backgroundColor: isDarkMode
                             ? const Color(0xFF272A3C)
                             : Colors.white,
                         textStyle:
@@ -243,7 +243,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
               'Datos adicionales',
               style: TextStyle(
                 fontSize: 18,
-                color: _isDarkMode ? Colors.white : Colors.black,
+                color: isDarkMode ? Colors.white : Colors.black,
                 fontFamily: 'ABeeZee',
               ),
             ),
@@ -265,8 +265,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                     'Facultad:',
                     style: TextStyle(
                       fontSize: 13,
-                      color:
-                          _isDarkMode ? Colors.white : Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black,
                       fontFamily: 'ABeeZee',
                     ),
                   ),
@@ -280,12 +279,12 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                       style: TextStyle(
                         fontSize: 11,
                         color:
-                            _isDarkMode ? Colors.white : Colors.black,
+                            isDarkMode ? Colors.white : Colors.black,
                         fontFamily: 'ABeeZee',
                       ),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: _isDarkMode
+                        fillColor: isDarkMode
                             ? const Color(0xFF343646)
                             : Colors.white,
                         border: const OutlineInputBorder(),
@@ -325,7 +324,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
               'Tema de la aplicación',
               style: TextStyle(
                 fontSize: 18,
-                color: _isDarkMode ? Colors.white : Colors.black,
+                color: isDarkMode ? Colors.white : Colors.black,
                 fontFamily: 'ABeeZee',
               ),
             ),
@@ -336,17 +335,19 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                   'Modo Oscuro',
                   style: TextStyle(
                     fontSize: 13,
-                    color: _isDarkMode ? Colors.white : Colors.black,
+                    color: isDarkMode ? Colors.white : Colors.black,
                     fontFamily: 'ABeeZee',
                   ),
                 ),
                 const SizedBox(width: 10),
                 Switch(
-                  value: _isDarkMode,
+                  value: isDarkMode,
                   onChanged: (value) {
+                    ref
+                        .read(themeNotifierProvider.notifier)
+                        .toggleDarkMode();
                     setState(() {
-                      _isDarkMode = value;
-                      if (!_isDarkMode) {
+                      if (!isDarkMode) {
                         // Cambia a color de fondo blanco cuando se desactiva el modo oscuro
                         _nameController.value = TextEditingValue(
                           text: _nameController.text,
@@ -452,7 +453,7 @@ class _PerfilAlumnoState extends State<PerfilAlumno> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _isDarkMode
+                  backgroundColor: isDarkMode
                       ? const Color(0xFF272A3C)
                       : Colors.white,
                   textStyle: const TextStyle(
