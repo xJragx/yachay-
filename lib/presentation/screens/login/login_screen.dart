@@ -1,5 +1,3 @@
-import 'package:aprendiendoflutter/config/theme/app_theme.dart';
-import 'package:aprendiendoflutter/config/theme/theme_provide.dart';
 import 'package:aprendiendoflutter/presentation/screens/login/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +13,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 30, 30, 44),
       body: _LoginForm(),
     );
   }
@@ -34,7 +33,6 @@ class _LoginForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loginForm = ref.watch(loginFormProvider);
-    final AppTheme appTheme = ref.watch(themeNotifierProvider);
     ref.listen(authProvider, (previous, next) {
       if (next.errorMessage.isEmpty) return;
 
@@ -65,6 +63,7 @@ class _LoginForm extends ConsumerWidget {
               child: Text(
                 'Bienvenido',
                 style: TextStyle(
+                  color: Colors.white,
                   fontFamily: 'Open Sans',
                   fontSize: 36.0,
                   fontWeight: FontWeight.bold,
@@ -77,7 +76,7 @@ class _LoginForm extends ConsumerWidget {
               child: Text(
                 '¡Bienvenido de vuelta! Ingresa tus datos, por favor.',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 133, 134, 143),
+                  color: Color(0xFFB0B3C6),
                   fontFamily: 'PT Sans',
                   fontSize: 12.0,
                 ),
@@ -90,6 +89,7 @@ class _LoginForm extends ConsumerWidget {
                 const Text(
                   'Correo institucional',
                   style: TextStyle(
+                    color: Colors.white,
                     fontSize: 14.0,
                     fontFamily: 'PT Sans',
                   ),
@@ -106,12 +106,12 @@ class _LoginForm extends ConsumerWidget {
                         ? loginForm.email.errorMessage
                         : null,
                     filled: true,
-                    fillColor: appTheme.getFillColor(),
+                    fillColor: const Color.fromRGBO(52, 54, 70, 100),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                   ),
-                  style: appTheme.getInputTextStyle(),
+                  style: const TextStyle(color: Colors.white),
                   validator: null,
                 ),
               ],
@@ -126,6 +126,7 @@ class _LoginForm extends ConsumerWidget {
                       const Text(
                         'Contraseña',
                         style: TextStyle(
+                          color: Colors.white,
                           fontSize: 14.0,
                           fontFamily: 'PT Sans',
                         ),
@@ -146,13 +147,13 @@ class _LoginForm extends ConsumerWidget {
                               ? loginForm.password.errorMessage
                               : null,
                           filled: true,
-                          fillColor: appTheme
-                              .getFillColor(), // Cambia el color según tu tema
+                          fillColor:
+                              const Color.fromRGBO(52, 54, 70, 100),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
-                        style: appTheme.getInputTextStyle(),
+                        style: const TextStyle(color: Colors.white),
                         validator: null,
                       )
                     ],
@@ -176,6 +177,7 @@ class _LoginForm extends ConsumerWidget {
                         fontFamily: 'PT Sans',
                         fontWeight: FontWeight.w400,
                         fontSize: 12.0,
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -225,7 +227,31 @@ class _LoginForm extends ConsumerWidget {
                         color: Colors.white,
                         fontSize: 14.0,
                         fontFamily: 'PT Sans',
-                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () {
+                  // Pendiente la lógica para iniciar sesión con Google
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/google_icon.webp',
+                        height: 24.0, width: 24.0),
+                    const SizedBox(width: 10.0),
+                    const Text(
+                      'Iniciar sesión con Google',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.0,
+                        fontFamily: 'PT Sans',
                       ),
                     ),
                   ],
@@ -243,7 +269,7 @@ class _LoginForm extends ConsumerWidget {
                   fontFamily: 'PT Sans',
                   fontWeight: FontWeight.w400,
                   fontSize: 12.0,
-                  color: Color.fromARGB(255, 145, 145, 145),
+                  color: Color(0xFFB8B8B8),
                 ),
               ),
             ),

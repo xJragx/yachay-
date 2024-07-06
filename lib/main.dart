@@ -1,4 +1,3 @@
-import 'package:aprendiendoflutter/config/theme/theme_provide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:aprendiendoflutter/config/config.dart';
@@ -14,13 +13,12 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appRouter = ref.watch(goRouterProvider);
-    final AppTheme appTheme = ref.watch(themeNotifierProvider);
 
     return MaterialApp.router(
       title: 'Yachay +',
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
-      theme: appTheme.getTheme(),
+      theme: AppTheme(selectedColor: 0).getTheme(),
     );
   }
 }
