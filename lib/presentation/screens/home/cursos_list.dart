@@ -50,56 +50,64 @@ class _CursosListState extends State<CursosList> {
             ),
           ),
         ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Text('Cursos',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+          ),
+        ),
         Expanded(
           child: ListView(
             children: [
-              const Padding(
-                padding: EdgeInsets.fromLTRB(48, 0, 0, 0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text('Cursos',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold)),
-                ),
-              ),
-              Builder(
-                builder: (BuildContext context) {
-                  var filteredCourses = data
-                      .where((curso) =>
-                          curso.nombre
-                              .toLowerCase()
-                              .contains(_searchTerm) ||
-                          curso.profesor
-                              .toLowerCase()
-                              .contains(_searchTerm.toLowerCase()))
-                      .toList();
+              Padding(
+                padding: const EdgeInsets.fromLTRB(40, 0, 40, 8),
+                child: Builder(
+                  builder: (BuildContext context) {
+                    var filteredCourses = data
+                        .where((curso) =>
+                            curso.nombre
+                                .toLowerCase()
+                                .contains(_searchTerm) ||
+                            curso.profesor
+                                .toLowerCase()
+                                .contains(_searchTerm.toLowerCase()))
+                        .toList();
 
-                  if (filteredCourses.isEmpty) {
-                    return const Center(
-                      child: Column(
-                        children: <Widget>[
-                          // Asegúrate de tener una imagen en la ruta especificada
-                          Text('No se encontraron cursos',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.bold)),
+                    if (filteredCourses.isEmpty) {
+                      return const Center(
+                        child: Column(
+                          children: <Widget>[
+                            // Asegúrate de tener una imagen en la ruta especificada
+                            Text('No se encontraron cursos',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Wrap(
+                              children: filteredCourses
+                                  .map((curso) => CursoCard(curso))
+                                  .toList(),
+                            ),
+                          ),
+                          const SizedBox(height: 20)
                         ],
-                      ),
-                    );
-                  } else {
-                    return Align(
-                      alignment: Alignment.topCenter,
-                      child: Wrap(
-                        children: filteredCourses
-                            .map((curso) => CursoCard(curso))
-                            .toList(),
-                      ),
-                    );
-                  }
-                },
+                      );
+                    }
+                  },
+                ),
               )
             ],
           ),

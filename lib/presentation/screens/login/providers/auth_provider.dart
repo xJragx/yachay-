@@ -46,7 +46,22 @@ class AuthNotifier extends StateNotifier<AuthState> {
     //     authStatus: AuthStatus.authenticated, user: user);
   }
 
-  void registerUser(String email, String password) async {}
+  Future<void> registerUser(
+      String email, String password, String name, String rol) async {
+    try {
+      final token =
+          await authRepository.register(email, password, name, rol);
+      print(token);
+      return;
+    } on WrongCredentials {
+      // logout('Credenciales no son correctas');
+    } on ConnectionTimeout {
+      // logout('Timeout de conexión');
+    } catch (e) {
+      // logout('Error desconocido');
+    }
+  }
+
   void checkAuthStatus() async {
     final token =
         await keyValueStorageService.getValue<String>('token');

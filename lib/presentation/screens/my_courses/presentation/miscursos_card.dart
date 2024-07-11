@@ -8,7 +8,6 @@ class MisCursosCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: 147,
         height: 206,
         decoration: BoxDecoration(
           color: const Color(0xFF2A2C3E),

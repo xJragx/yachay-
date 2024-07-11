@@ -17,6 +17,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 class HomeScreenState extends ConsumerState<HomeScreen> {
   int _selectedIndex = 0;
   @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -79,10 +80,6 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
                   label: '',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.insert_chart_outlined),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
                   icon: CircleAvatar(
                     radius: 12,
                     backgroundImage: NetworkImage(
@@ -116,12 +113,8 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
         return const Center(
           child: MyCoursesScreen(),
         ); // Reemplaza con tu vista
+      // Reemplaza con tu vista
       case 2:
-        return const Center(
-          child:
-              Text('vista 3', style: TextStyle(color: Colors.white)),
-        ); // Reemplaza con tu vista
-      case 3:
         return const Center(
           child: PerfilAlumno(),
         ); // Reemplaza con tu vista

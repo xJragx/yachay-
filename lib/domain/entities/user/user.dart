@@ -1,4 +1,5 @@
 class User {
+  final int id;
   final String name;
   final String lastName;
   final String type;
@@ -10,6 +11,7 @@ class User {
 
   User(
       {required this.name,
+      required this.id,
       required this.lastName,
       required this.type,
       required this.email,

@@ -2,6 +2,7 @@ import 'package:aprendiendoflutter/domain/domain.dart';
 
 class UserMapper {
   static User userJsonToEntity(Map<String, dynamic> json) => User(
+      id: json['id'],
       name: json['name'],
       type: json['type'],
       lastName: json['lastName'],

@@ -1,30 +1,30 @@
 import 'package:formz/formz.dart';
 
 // Define input validation errors
-enum PasswordError { empty, length }
+enum NameError { empty, length }
 
 // Extend FormzInput and provide the input type and error type.
-class Password extends FormzInput<String, PasswordError> {
+class Name extends FormzInput<String, NameError> {
   static final RegExp passwordRegExp = RegExp(
     r'(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-z]).*$',
   );
 
   // Call super.pure to represent an unmodified form input.
-  const Password.pure() : super.pure('');
+  const Name.pure() : super.pure('');
 
   // Call super.dirty to represent a modified form input.
-  const Password.dirty(String value) : super.dirty(value);
+  const Name.dirty(String value) : super.dirty(value);
 
   String? get errorMessage {
     if (isValid || isPure) return null;
 
-    if (displayError == PasswordError.empty) {
+    if (displayError == NameError.empty) {
       return 'El campo es requerido';
     }
-    if (displayError == PasswordError.length) {
-      return 'Mínimo 6 caracteres';
+    if (displayError == NameError.length) {
+      return 'Mínimo 50 caracteres';
     }
-    // if (displayError == PasswordError.format)
+    // if (displayError == NameError.format)
     //   return 'Debe de tener Mayúscula, letras y un número';
 
     return null;
@@ -32,12 +32,13 @@ class Password extends FormzInput<String, PasswordError> {
 
   // Override validator to handle validating a given input value.
   @override
-  PasswordError? validator(String value) {
+  NameError? validator(String value) {
     if (value.isEmpty || value.trim().isEmpty) {
-      return PasswordError.empty;
+      return NameError.empty;
     }
-    if (value.length < 6) {
-      return PasswordError.length;
+
+    if (value.length > 50) {
+      return NameError.length;
     }
     // if (!passwordRegExp.hasMatch(value)) return PasswordError.format;
 
