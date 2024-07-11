@@ -94,15 +94,28 @@ class _CursosListState extends State<CursosList> {
                     } else {
                       return Column(
                         children: [
+                          const SizedBox(height: 20,),
                           Align(
                             alignment: Alignment.topCenter,
                             child: Wrap(
-                              children: filteredCourses
-                                  .map((curso) => CursoCard(curso))
-                                  .toList(),
+                              children:[
+                                ...filteredCourses.map(
+                                  (curso) => Column(
+                                    children: [
+                                      CursoCard(curso),
+                                      const SizedBox(height: 25,)
+                                    ],
+                                  )
+                                  )
+                                
+                              ]
+                                // filteredCourses
+                                //   .map((curso) => CursoCard(curso))
+                                //   .toList()
+                              ,
                             ),
                           ),
-                          const SizedBox(height: 20)
+                          
                         ],
                       );
                     }
