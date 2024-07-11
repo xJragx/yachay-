@@ -1057,7 +1057,7 @@ class CourseDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Container(
               margin: const EdgeInsets.only(top: 20.0),
               padding: const EdgeInsets.all(10.0),

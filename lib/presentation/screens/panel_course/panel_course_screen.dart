@@ -29,7 +29,7 @@ class PanelCoursePage extends StatelessWidget {
             Ink(
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
-                color: Color(0xFF2A2C3E),
+                color: const Color(0xFF2A2C3E),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: InkWell(
@@ -130,7 +130,7 @@ class PanelCoursePage extends StatelessWidget {
             Ink(
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
-                color: Color(0xFF2A2C3E),
+                color: const Color(0xFF2A2C3E),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: InkWell(
@@ -328,7 +328,7 @@ class PanelCoursePage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
           ],
         ),
       ),

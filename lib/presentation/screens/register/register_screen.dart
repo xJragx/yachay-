@@ -16,8 +16,8 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 30, 30, 44),
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 30, 30, 44),
       body: _RegisterForm(),
     );
   }
@@ -87,7 +87,7 @@ class _RegisterForm extends ConsumerWidget {
                   // Aquí puedes personalizar aún más la apariencia si lo deseas
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0)),
-                  contentPadding: EdgeInsets.all(10),
+                  contentPadding: const EdgeInsets.all(10),
                   // Suponiendo que tienes una variable booleana `isRoleInvalid` que determina si mostrar o no el error
                   errorText: ref
                       .read(registerFormProvider)

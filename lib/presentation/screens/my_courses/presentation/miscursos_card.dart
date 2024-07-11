@@ -61,9 +61,9 @@ class MisCursosCard extends StatelessWidget {
                     ),
                   ],
                 )),
-            Container(
+            const SizedBox(
               width: 185,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Icon(Icons.description_outlined,

@@ -117,7 +117,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                 seconds: 1), // Duración de la animación
             transitionBuilder:
                 (Widget child, Animation<double> animation) {
-              return FadeTransition(child: child, opacity: animation);
+              return FadeTransition(opacity: animation, child: child);
             },
             child: IndexedStack(
               key: ValueKey<int>(

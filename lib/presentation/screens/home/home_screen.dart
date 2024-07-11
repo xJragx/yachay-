@@ -22,7 +22,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: const Color(0xFFe1e1e2c),
+          backgroundColor: const Color(0xffe1e1e2c),
           appBar: AppBar(
             backgroundColor: const Color(0xff2a2c3e),
             leading: Padding(
