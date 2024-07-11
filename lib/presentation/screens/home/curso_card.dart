@@ -14,12 +14,13 @@ class CursoCard extends StatelessWidget {
         context.push('/detail');
       },
       child: Container(
-        height: 340,
+        height: 350,
         decoration: BoxDecoration(
           color: const Color(0xFF2A2C3E),
           borderRadius:
               BorderRadius.circular(10.0), // Redondez de los bordes
         ),
+        padding: const EdgeInsets.fromLTRB(10, 10, 10,0),
         child: Column(
           children: [
             Padding(
@@ -47,7 +48,9 @@ class CursoCard extends StatelessWidget {
                       color: Colors.white,
                       height: 0.9,
                       fontSize: 20.0,
-                      fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.w400,
+                      overflow: TextOverflow.ellipsis
+                  ),
                 ),
               ),
             ),
@@ -100,6 +103,7 @@ class CursoCard extends StatelessWidget {
           ],
         ),
       ),
+      
     );
   }
 }

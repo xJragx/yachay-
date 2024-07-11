@@ -331,6 +331,7 @@ class _RegisterForm extends ConsumerWidget {
                 ref
                     .read(registerFormProvider.notifier)
                     .onFormSubmit();
+                context.go('/login');
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(
