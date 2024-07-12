@@ -22,4 +22,9 @@ class AuthRepositoryImpl extends AuthRepository {
       String email, String password, String name, String rol) {
     return dataSource.register(email, password, name, rol);
   }
+  
+  @override
+  Future<User> myProfile(String token) {
+    return dataSource.myProfile(token);
+  }
 }

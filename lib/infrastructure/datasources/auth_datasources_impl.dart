@@ -75,4 +75,24 @@ class AuthDataSourceImpl implements AuthDataSource {
       throw CustomError('Something wrong happend');
     }
   }
+
+  @override
+  Future<User> myProfile(String token) async {
+    try {
+      final response = await dio.get(
+        '/auth/me',
+        options: Options(headers: {
+          'Authorization': 'Bearer $token',
+        }),
+      );
+      final user = UserMapper.userJsonToEntity(response.data);
+      return user;
+    } on DioException catch (e) {
+      print(e);
+      throw CustomError('Something went wrong');
+    } catch (e) {
+      print(e);
+      throw CustomError('Something went wrong');
+    }
+  }
 }
