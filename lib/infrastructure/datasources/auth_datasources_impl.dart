@@ -43,14 +43,14 @@ class AuthDataSourceImpl implements AuthDataSource {
   }
 
   @override
-  Future<User> register(
-      String email, String password, String name, String rol) async {
+  Future<User> register(String email, String password, String name,
+      String rol, String lastName) async {
     try {
       final response = await dio.post(
         '/auth/register',
         data: {
           "name": name,
-          "lastName": 'Alata',
+          "lastName": lastName,
           "type": rol,
           "email": email,
           "password": password,
@@ -61,17 +61,14 @@ class AuthDataSourceImpl implements AuthDataSource {
       print(user);
       return user;
     } on DioException catch (e) {
-      print(e);
       if (e.response?.statusCode == 401) {
         throw WrongCredentials();
       }
       if (e.type == DioExceptionType.connectionError) {
-        print(e);
         throw ConnectionTimeout();
       }
       throw CustomError('Something wrong happend');
     } catch (e) {
-      print(e);
       throw CustomError('Something wrong happend');
     }
   }
