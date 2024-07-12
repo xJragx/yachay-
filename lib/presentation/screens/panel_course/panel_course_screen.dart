@@ -26,6 +26,27 @@ class PanelCoursePage extends StatelessWidget {
         ),
         child: Column(
           children: [
+            ButtonBar(
+              alignment: MainAxisAlignment.start,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    context.push('/create-course');
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(
+                      const Color(0xFF272A3C),
+                    ),
+                  ),
+                  child: const Text(
+                    'Crear curso',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Ink(
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
