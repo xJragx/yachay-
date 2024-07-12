@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CreateCourseScreen extends StatelessWidget {
   const CreateCourseScreen({super.key});
   static const String name = 'create_course_screen';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,9 +12,7 @@ class CreateCourseScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           'Crear Curso',
-          style: TextStyle(
-            color: Colors.white
-          ),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0xFF1A1A2E),
       ),
@@ -23,7 +22,7 @@ class CreateCourseScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 15,),
+              const SizedBox(height: 15),
               DropdownButtonFormField<String>(
                 decoration: InputDecoration(
                   labelText: 'Categoría',
@@ -37,10 +36,15 @@ class CreateCourseScreen extends StatelessWidget {
                 items: ['Option 1', 'Option 2', 'Option 3']
                     .map((option) => DropdownMenuItem(
                           value: option,
-                          child: Text(option),
+                          child: Text(
+                            option,
+                            style: const TextStyle(color: Colors.white),
+                          ),
                         ))
                     .toList(),
                 onChanged: (value) {},
+                style: const TextStyle(color: Colors.white),
+                dropdownColor: const Color(0xFF2A2C3E),
               ),
               const SizedBox(height: 16.0),
               Container(
@@ -99,10 +103,15 @@ class CreateCourseScreen extends StatelessWidget {
                       items: ['\$0', '\$10', '\$20']
                           .map((option) => DropdownMenuItem(
                                 value: option,
-                                child: Text(option),
+                                child: Text(
+                                  option,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
                               ))
                           .toList(),
                       onChanged: (value) {},
+                      style: const TextStyle(color: Colors.white),
+                      dropdownColor: const Color(0xFF2A2C3E),
                     ),
                   ),
                   const SizedBox(width: 16.0),
@@ -120,10 +129,15 @@ class CreateCourseScreen extends StatelessWidget {
                       items: ['0%', '10%', '20%']
                           .map((option) => DropdownMenuItem(
                                 value: option,
-                                child: Text(option),
+                                child: Text(
+                                  option,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
                               ))
                           .toList(),
                       onChanged: (value) {},
+                      style: const TextStyle(color: Colors.white),
+                      dropdownColor: const Color(0xFF2A2C3E),
                     ),
                   ),
                 ],
