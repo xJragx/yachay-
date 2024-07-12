@@ -20,10 +20,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final AuthRepository authRepository;
   final KeyValueStorageService keyValueStorageService;
 
-  AuthNotifier(
-      {required this.keyValueStorageService,
-      required this.authRepository})
-      : super(AuthState()) {
+  AuthNotifier({
+    required this.keyValueStorageService,
+    required this.authRepository,
+  }) : super(AuthState()) {
     checkAuthStatus();
   }
 
@@ -40,25 +40,22 @@ class AuthNotifier extends StateNotifier<AuthState> {
     } catch (e) {
       logout('Error desconocido');
     }
-
-    // final user = await authRepository.login(email, password);
-    // state = state.copyWith(
-    //     authStatus: AuthStatus.authenticated, user: user);
   }
 
-  Future<void> registerUser(
-      String email, String password, String name, String rol) async {
+  Future<void> registerUser(String email, String password,
+      String name, String rol, String lastName) async {
     try {
-      final token =
-          await authRepository.register(email, password, name, rol);
-      print(token);
-      return;
+      state = state.copyWith(isLoading: true);
+      final user = await authRepository.register(
+          email, password, name, rol, lastName);
+      print('User: $user');
     } on WrongCredentials {
-      // logout('Credenciales no son correctas');
+      // Manejar error de credenciales incorrectas
     } on ConnectionTimeout {
-      // logout('Timeout de conexión');
+      // Manejar error de tiempo de conexión
     } catch (e) {
-      // logout('Error desconocido');
+    } finally {
+      state = state.copyWith(isLoading: false);
     }
   }
 
@@ -100,16 +97,30 @@ class AuthState {
   final AuthStatus authStatus;
   final Token? token;
   final String errorMessage;
+  final bool isLoading;
+  // Nueva variable para el estado de registro
 
-  AuthState(
-      {this.authStatus = AuthStatus.checking,
-      this.token,
-      this.errorMessage = ''});
-  AuthState copyWith(
-      {AuthStatus? authStatus, Token? token, String? errorMessage}) {
+  AuthState({
+    this.authStatus = AuthStatus.checking,
+    this.token,
+    this.errorMessage = '',
+    this.isLoading = false,
+    // Valor inicial de isRegistered
+  });
+
+  AuthState copyWith({
+    AuthStatus? authStatus,
+    Token? token,
+    String? errorMessage,
+    bool? isLoading,
+    // Añadir isRegistered a copyWith
+  }) {
     return AuthState(
-        authStatus: authStatus ?? this.authStatus,
-        token: token ?? this.token,
-        errorMessage: errorMessage ?? this.errorMessage);
+      authStatus: authStatus ?? this.authStatus,
+      token: token ?? this.token,
+      errorMessage: errorMessage ?? this.errorMessage,
+      isLoading: isLoading ?? this.isLoading,
+      // Copiar isRegistered
+    );
   }
 }
