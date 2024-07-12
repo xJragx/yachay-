@@ -56,6 +56,11 @@ final goRouterProvider = Provider((ref) {
         builder: (context, state) => const PanelDetailCoursePage(),
       ),
       GoRoute(
+        path: '/create-course',
+        name: CreateCourseScreen.name,
+        builder: (context, state) => const CreateCourseScreen(),
+      ),
+      GoRoute(
         path: '/notification',
         name: NotificationScreen.name,
         builder: (context, state) => const NotificationScreen(),
