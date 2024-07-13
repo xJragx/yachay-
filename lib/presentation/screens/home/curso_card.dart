@@ -71,7 +71,8 @@ class CursoCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                      child: Text('${curso.teacher?.name}',
+                      child: Text(
+                          '${curso.teacher?.name} ${curso.teacher?.lastName}',
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15.0,
