@@ -3,7 +3,7 @@ import 'package:aprendiendoflutter/domain/domain.dart';
 import 'package:aprendiendoflutter/infrastructure/mappers/user_mapper.dart';
 
 class CourseMapper {
-  static Course userJsonToEntity(Map<String, dynamic> json) => Course(
+  static Course courseJsonToEntity(Map<String, dynamic> json) => Course(
       id: json['id'],
       idTeacher: json['idTeacher'],
       name: json['name'],

@@ -32,20 +32,19 @@ class _CursosListState extends State<CursosList> {
       dio.interceptors.add(InterceptorsWrapper(
         onRequest: (options, handler) {
           options.headers['Authorization'] = 'Bearer $token';
-          return handler
-              .next(options); // Deja que la solicitud continúe
+          return handler.next(options); // Deja que la solicitud continúe
         },
       ));
 
-      final response = await dio
-          .get('https://yachay-backend.onrender.com/v1/courses');
+      final response =
+          await dio.get('https://yachay-backend.onrender.com/v1/courses');
       print('${response}');
       print('${response.statusCode}');
       if (response.statusCode == 200) {
         setState(() {
           print('response.data: ${response.data}');
-          _courses = List<Course>.from(response.data
-              .map((x) => CourseMapper.userJsonToEntity(x)));
+          _courses = List<Course>.from(
+              response.data.map((x) => CourseMapper.courseJsonToEntity(x)));
           print('courses: $_courses');
           _isLoading = false;
         });
@@ -66,9 +65,8 @@ class _CursosListState extends State<CursosList> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     var filteredCourses = _courses
-        .where((curso) => curso.name
-            .toLowerCase()
-            .contains(_searchTerm.toLowerCase()))
+        .where((curso) =>
+            curso.name.toLowerCase().contains(_searchTerm.toLowerCase()))
         .toList();
 
     return Column(
@@ -92,13 +90,11 @@ class _CursosListState extends State<CursosList> {
                   filled: true,
                   fillColor: Color(0xff343646),
                   border: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(50.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(50.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
                   )),
             ),
           ),
@@ -120,8 +116,7 @@ class _CursosListState extends State<CursosList> {
               : ListView(
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsets.fromLTRB(40, 0, 40, 8),
+                      padding: const EdgeInsets.fromLTRB(40, 0, 40, 8),
                       child: Builder(
                         builder: (BuildContext context) {
                           if (filteredCourses.isEmpty) {
@@ -132,8 +127,7 @@ class _CursosListState extends State<CursosList> {
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14.0,
-                                          fontWeight:
-                                              FontWeight.bold)),
+                                          fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             );
@@ -147,15 +141,14 @@ class _CursosListState extends State<CursosList> {
                                   alignment: Alignment.topCenter,
                                   child: Wrap(
                                     children: [
-                                      ...filteredCourses
-                                          .map((curso) => Column(
-                                                children: [
-                                                  CursoCard(curso),
-                                                  const SizedBox(
-                                                    height: 25,
-                                                  )
-                                                ],
-                                              ))
+                                      ...filteredCourses.map((curso) => Column(
+                                            children: [
+                                              CursoCard(curso),
+                                              const SizedBox(
+                                                height: 25,
+                                              )
+                                            ],
+                                          ))
                                     ],
                                   ),
                                 ),

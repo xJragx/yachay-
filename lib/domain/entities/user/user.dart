@@ -10,17 +10,18 @@ class User {
   final String? college;
   final String? profilePicture;
 
-  User(
-      {this.name,
-      required this.id,
-      this.lastName,
-      this.type,
-      this.email,
-      this.password,
-      this.phone,
-      this.secondEmail,
-      this.college,
-      this.profilePicture});
+  User({
+    this.name,
+    required this.id,
+    this.lastName,
+    this.type,
+    this.email,
+    this.password,
+    this.phone,
+    this.secondEmail,
+    this.college,
+    this.profilePicture,
+  });
   bool get isStudent {
     return type == 'teacher';
   }

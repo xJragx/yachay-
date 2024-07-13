@@ -1,4 +1,7 @@
+import 'package:aprendiendoflutter/presentation/screens/panel_course/providers/courses_provider.dart';
+import 'package:aprendiendoflutter/presentation/screens/panel_course/providers/create_course_form_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateCourseScreen extends StatelessWidget {
   const CreateCourseScreen({super.key});
@@ -6,6 +9,36 @@ class CreateCourseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 30, 30, 44),
+      body: _CreateCourseForm(),
+    );
+  }
+}
+
+class _CreateCourseForm extends ConsumerWidget {
+  const _CreateCourseForm();
+  void showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final createCourseForm = ref.watch(createCourseFormProvider);
+    ref.listen(coursesProvider, (previous, next) {
+      if (next.errorMessage.isEmpty) return;
+
+      showSnackBar(
+        context,
+        next.errorMessage,
+      );
+    });
+
     return Scaffold(
       backgroundColor: const Color(0xFF1A1A2E),
       appBar: AppBar(
@@ -23,49 +56,30 @@ class CreateCourseScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 15),
-              DropdownButtonFormField<String>(
+              TextFormField(
+                onChanged:
+                    ref.read(createCourseFormProvider.notifier).onNameChange,
+                enableInteractiveSelection: false,
+                autofocus: true,
                 decoration: InputDecoration(
-                  labelText: 'Categoría',
+                  labelText: 'Nombre del curso',
                   labelStyle: const TextStyle(color: Colors.white),
-                  fillColor: const Color(0xFF2A2C3E),
+                  fillColor: const Color(0xFF343646),
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                items: ['Option 1', 'Option 2', 'Option 3']
-                    .map((option) => DropdownMenuItem(
-                          value: option,
-                          child: Text(
-                            option,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ))
-                    .toList(),
-                onChanged: (value) {},
                 style: const TextStyle(color: Colors.white),
-                dropdownColor: const Color(0xFF2A2C3E),
-              ),
-              const SizedBox(height: 16.0),
-              Container(
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF0F3460),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.image,
-                    size: 50,
-                    color: Colors.white,
-                  ),
-                ),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                onChanged:
+                    ref.read(createCourseFormProvider.notifier).onBannerChange,
+                enableInteractiveSelection: false,
+                autofocus: true,
                 decoration: InputDecoration(
-                  labelText: 'Insertar Título',
+                  labelText: 'Link de la imagen',
                   labelStyle: const TextStyle(color: Colors.white),
                   fillColor: const Color(0xFF343646),
                   filled: true,
@@ -73,11 +87,17 @@ class CreateCourseScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
+                style: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                onChanged: ref
+                    .read(createCourseFormProvider.notifier)
+                    .onCategoryChange,
+                enableInteractiveSelection: false,
+                autofocus: true,
                 decoration: InputDecoration(
-                  labelText: 'Qué enseñará',
+                  labelText: 'Categoria',
                   labelStyle: const TextStyle(color: Colors.white),
                   fillColor: const Color(0xFF343646),
                   filled: true,
@@ -85,12 +105,37 @@ class CreateCourseScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
+                style: const TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 16.0),
+              TextFormField(
+                onChanged:
+                    ref.read(createCourseFormProvider.notifier).onResumeChange,
+                enableInteractiveSelection: false,
+                autofocus: true,
+                decoration: InputDecoration(
+                  labelText: 'Qué se enseñará en este curso?',
+                  labelStyle: const TextStyle(color: Colors.white),
+                  fillColor: const Color(0xFF343646),
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                style: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 16.0),
               Row(
                 children: [
                   Expanded(
-                    child: DropdownButtonFormField<String>(
+                    child: TextFormField(
+                      onChanged: (value) {
+                        ref
+                            .read(createCourseFormProvider.notifier)
+                            .onPriceChange(double.parse(value));
+                      },
+                      enableInteractiveSelection: false,
+                      autofocus: true,
                       decoration: InputDecoration(
                         labelText: 'Precio',
                         labelStyle: const TextStyle(color: Colors.white),
@@ -100,23 +145,19 @@ class CreateCourseScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      items: ['\$0', '\$10', '\$20']
-                          .map((option) => DropdownMenuItem(
-                                value: option,
-                                child: Text(
-                                  option,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ))
-                          .toList(),
-                      onChanged: (value) {},
                       style: const TextStyle(color: Colors.white),
-                      dropdownColor: const Color(0xFF2A2C3E),
                     ),
                   ),
                   const SizedBox(width: 16.0),
                   Expanded(
-                    child: DropdownButtonFormField<String>(
+                    child: TextFormField(
+                      onChanged: (value) {
+                        ref
+                            .read(createCourseFormProvider.notifier)
+                            .onDiscountChange(double.parse(value));
+                      },
+                      enableInteractiveSelection: false,
+                      autofocus: true,
                       decoration: InputDecoration(
                         labelText: 'Descuento',
                         labelStyle: const TextStyle(color: Colors.white),
@@ -126,18 +167,7 @@ class CreateCourseScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      items: ['0%', '10%', '20%']
-                          .map((option) => DropdownMenuItem(
-                                value: option,
-                                child: Text(
-                                  option,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ))
-                          .toList(),
-                      onChanged: (value) {},
                       style: const TextStyle(color: Colors.white),
-                      dropdownColor: const Color(0xFF2A2C3E),
                     ),
                   ),
                 ],
@@ -145,6 +175,11 @@ class CreateCourseScreen extends StatelessWidget {
               const SizedBox(height: 16.0),
               TextFormField(
                 maxLines: 4,
+                onChanged: ref
+                    .read(createCourseFormProvider.notifier)
+                    .onBenefitsChange,
+                enableInteractiveSelection: false,
+                autofocus: true,
                 decoration: InputDecoration(
                   labelText: 'Lo que aprenderás',
                   labelStyle: const TextStyle(color: Colors.white),
@@ -158,6 +193,11 @@ class CreateCourseScreen extends StatelessWidget {
               const SizedBox(height: 16.0),
               TextFormField(
                 maxLines: 4,
+                onChanged: ref
+                    .read(createCourseFormProvider.notifier)
+                    .onTargetPublicChange,
+                enableInteractiveSelection: false,
+                autofocus: true,
                 decoration: InputDecoration(
                   labelText: '¿Para quién es este curso?',
                   labelStyle: const TextStyle(color: Colors.white),
@@ -171,6 +211,11 @@ class CreateCourseScreen extends StatelessWidget {
               const SizedBox(height: 16.0),
               TextFormField(
                 maxLines: 4,
+                onChanged: ref
+                    .read(createCourseFormProvider.notifier)
+                    .onDescriptionChange,
+                enableInteractiveSelection: false,
+                autofocus: true,
                 decoration: InputDecoration(
                   labelText: 'Descripción',
                   labelStyle: const TextStyle(color: Colors.white),
@@ -188,9 +233,14 @@ class CreateCourseScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: createCourseForm.isPosting
+                          ? null
+                          : ref
+                              .read(createCourseFormProvider.notifier)
+                              .onFormSubmit,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1A73E8), // Button background color
+                        backgroundColor:
+                            const Color(0xFF1A73E8), // Button background color
                       ),
                       child: const Text(
                         'Crear Curso',
@@ -206,7 +256,8 @@ class CreateCourseScreen extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.white, // Button background color
+                        backgroundColor:
+                            Colors.white, // Button background color
                       ),
                       child: const Text('Cancelar'),
                     ),
