@@ -1,4 +1,4 @@
-import 'package:aprendiendoflutter/domain/entities/user/notif/notif.dart';
+import 'package:aprendiendoflutter/domain/entities/notif/notif.dart';
 
 class NotifMapper {
   static Notif notifJsonToEntity(Map<String, dynamic> json) => Notif(

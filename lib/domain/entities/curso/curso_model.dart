@@ -1,3 +1,5 @@
+import 'package:aprendiendoflutter/domain/entities/user/user.dart';
+
 class Course {
   final int id;
   final int idTeacher;
@@ -13,6 +15,7 @@ class Course {
   final String? benefits;
   final String? targetPublic;
   final String? description;
+  final User? teacher;
 
   Course({
     required this.id,
@@ -29,5 +32,6 @@ class Course {
     this.benefits,
     this.targetPublic,
     this.description,
+    this.teacher,
   });
 }

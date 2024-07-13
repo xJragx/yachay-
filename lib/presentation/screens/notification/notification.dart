@@ -1,5 +1,5 @@
 import 'package:aprendiendoflutter/domain/entities/curso/curso_model.dart';
-import 'package:aprendiendoflutter/domain/entities/user/notif/notif.dart';
+import 'package:aprendiendoflutter/domain/entities/notif/notif.dart';
 import 'package:aprendiendoflutter/infrastructure/mappers/notif_mapper.dart';
 import 'package:aprendiendoflutter/infrastructure/shared/services/key_value_storage_service_impl.dart';
 import 'package:dio/dio.dart';

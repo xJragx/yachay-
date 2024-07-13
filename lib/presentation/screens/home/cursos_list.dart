@@ -40,10 +40,13 @@ class _CursosListState extends State<CursosList> {
       final response = await dio
           .get('https://yachay-backend.onrender.com/v1/courses');
       print('${response}');
+      print('${response.statusCode}');
       if (response.statusCode == 200) {
         setState(() {
+          print('response.data: ${response.data}');
           _courses = List<Course>.from(response.data
               .map((x) => CourseMapper.userJsonToEntity(x)));
+          print('courses: $_courses');
           _isLoading = false;
         });
       } else {
@@ -52,6 +55,7 @@ class _CursosListState extends State<CursosList> {
         });
       }
     } catch (e) {
+      print('Error: $e');
       setState(() {
         _isLoading = false;
       });
