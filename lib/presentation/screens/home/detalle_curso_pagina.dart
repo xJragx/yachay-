@@ -54,9 +54,9 @@ class CourseDetailPage extends ConsumerWidget {
                   fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 20.0),
-            const Text(
-              'Aprende todo sobre dibujo vectorial con Illustrator y sé un experto: de dibujos simples a gráficos complejos y avanzados',
-              style: TextStyle(
+            Text(
+              "${curso.resume}",
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 14.0,
                 fontFamily: 'ABeeZee',
@@ -117,11 +117,11 @@ class CourseDetailPage extends ConsumerWidget {
                       color: const Color(0xFF2A2C3E),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             'Calificación',
                             style: TextStyle(
                                 color: Colors.white,
@@ -132,15 +132,15 @@ class CourseDetailPage extends ConsumerWidget {
                             mainAxisAlignment:
                                 MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.star_border_outlined,
                                 color: Colors.white,
                                 size: 20.0,
                               ),
                               SizedBox(width: 5.0),
                               Text(
-                                '4.5',
-                                style: TextStyle(
+                                '${curso.rating}',
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 14.0,
                                     fontWeight: FontWeight.w600),
@@ -199,9 +199,9 @@ class CourseDetailPage extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 20.0),
-            const Text(
-              'Docente: Juan Carlos',
-              style: TextStyle(
+            Text(
+              'Docente: ${curso.teacher?.name} ${curso.teacher?.lastName}',
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 14.0,
                 fontWeight: FontWeight.w400,
@@ -219,9 +219,9 @@ class CourseDetailPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 10.0),
-            const Text(
-              'Idioma: Español',
-              style: TextStyle(
+            Text(
+              'Idioma: ${curso.language}',
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 14.0,
                 fontWeight: FontWeight.w400,
@@ -243,20 +243,20 @@ class CourseDetailPage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
                           Text(
-                            'S/ 69,90 ',
-                            style: TextStyle(
+                            '${curso.price}',
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(width: 5.0),
-                          Text(
+                          const Text(
                             'S/ 299,90',
                             style: TextStyle(
                               color: Colors.grey,
@@ -268,7 +268,7 @@ class CourseDetailPage extends ConsumerWidget {
                         ],
                       ),
                       Text(
-                        '77% de desc.',
+                        '${curso.discount}%',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 10.0,
