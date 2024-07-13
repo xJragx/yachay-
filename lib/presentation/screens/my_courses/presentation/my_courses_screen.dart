@@ -16,122 +16,130 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const Text(
-          'Mis Cursos',
-          style: TextStyle(fontSize: 30, color: Colors.white),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: _index == 0
-                        ? Colors.blue
-                        : Colors.transparent,
-                    width: 2.0,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: 40.0, vertical: 20.0),
+      child: Column(
+        children: <Widget>[
+          const Text(
+            'Mis Cursos',
+            style: TextStyle(fontSize: 30, color: Colors.white),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: _index == 0
+                          ? Colors.blue
+                          : Colors.transparent,
+                      width: 2.0,
+                    ),
                   ),
                 ),
-              ),
-              child: TextButton(
-                child: Text(
-                  'Todos',
-                  style: TextStyle(
-                    color: _index == 0
-                        ? Colors.white
-                        : Colors
-                            .grey, // Cambia el color en función de _index
+                child: TextButton(
+                  child: Text(
+                    'Todos',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: _index == 0
+                          ? Colors.white
+                          : Colors
+                              .grey, // Cambia el color en función de _index
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _index = 0;
-                  });
-                },
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: _index == 1
-                        ? Colors.blue
-                        : Colors.transparent,
-                    width: 2.0,
-                  ),
+                  onPressed: () {
+                    setState(() {
+                      _index = 0;
+                    });
+                  },
                 ),
               ),
-              child: TextButton(
-                child: Text(
-                  'Activos',
-                  style: TextStyle(
-                    color: _index == 1
-                        ? Colors.white
-                        : Colors
-                            .grey, // Cambia el color en función de _index
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: _index == 1
+                          ? Colors.blue
+                          : Colors.transparent,
+                      width: 2.0,
+                    ),
                   ),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _index = 1;
-                  });
-                },
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: _index == 2
-                        ? Colors.blue
-                        : Colors.transparent,
-                    width: 2.0,
+                child: TextButton(
+                  child: Text(
+                    'Activos',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: _index == 1
+                          ? Colors.white
+                          : Colors
+                              .grey, // Cambia el color en función de _index
+                    ),
                   ),
+                  onPressed: () {
+                    setState(() {
+                      _index = 1;
+                    });
+                  },
                 ),
               ),
-              child: TextButton(
-                child: Text(
-                  'Completados',
-                  style: TextStyle(
-                    color: _index == 2
-                        ? Colors.white
-                        : Colors
-                            .grey, // Cambia el color en función de _index
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: _index == 2
+                          ? Colors.blue
+                          : Colors.transparent,
+                      width: 2.0,
+                    ),
                   ),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _index = 2;
-                  });
-                },
+                child: TextButton(
+                  child: Text(
+                    'Completados',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: _index == 2
+                          ? Colors.white
+                          : Colors
+                              .grey, // Cambia el color en función de _index
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _index = 2;
+                    });
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
-        Expanded(
-          child: AnimatedSwitcher(
-            duration: const Duration(
-                seconds: 1), // Duración de la animación
-            transitionBuilder:
-                (Widget child, Animation<double> animation) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-            child: IndexedStack(
-              key: ValueKey<int>(
-                  _index), // Asegúrate de que _index cambie cuando cambies de vista
-              index: _index,
-              children: const <Widget>[
-                MisCursosCards(), // Vista 1
-                MisCursosCards(), // Vista 2
-                MisCursosCards(), // Vista 3
-              ],
+            ],
+          ),
+          Expanded(
+            child: AnimatedSwitcher(
+              duration: const Duration(
+                  seconds: 1), // Duración de la animación
+              transitionBuilder:
+                  (Widget child, Animation<double> animation) {
+                return FadeTransition(
+                    opacity: animation, child: child);
+              },
+              child: IndexedStack(
+                key: ValueKey<int>(
+                    _index), // Asegúrate de que _index cambie cuando cambies de vista
+                index: _index,
+                children: const <Widget>[
+                  MisCursosCards(), // Vista 1
+                  MisCursosCards(), // Vista 2
+                  MisCursosCards(), // Vista 3
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

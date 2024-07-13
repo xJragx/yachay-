@@ -9,7 +9,7 @@ class PanelCoursePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 30, 30, 44),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 42, 44, 62),
+        backgroundColor: const Color.fromARGB(255, 30, 30, 44),
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => context.pop()),
@@ -33,11 +33,11 @@ class PanelCoursePage extends StatelessWidget {
                   onPressed: () {
                     context.push('/create-course');
                   },
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(
-                      const Color(0xFF272A3C),
-                    ),
-                  ),
+                  // style: ButtonStyle(
+                  //   backgroundColor: WidgetStateProperty.all(
+                  //     const Color(0xFF272A3C),
+                  //   ),
+                  // ),
                   child: const Text(
                     'Crear curso',
                     style: TextStyle(

@@ -32,6 +32,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
     try {
       final token = await authRepository.login(email, password);
+      print('token loginUser: $token');
       _setLoggedUser(token);
     } on WrongCredentials {
       logout('Credenciales no son correctas');
@@ -83,6 +84,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   Future<void> logout([String? errorMessage]) async {
     await keyValueStorageService.removeKey('token');
+
     state = state.copyWith(
       authStatus: AuthStatus.notAuthenticated,
       token: null,

@@ -40,11 +40,11 @@ final goRouterProvider = Provider((ref) {
         name: CartScreen.name,
         builder: (context, state) => const CartScreen(),
       ),
-      GoRoute(
-        path: '/detail',
-        name: CourseDetailPage.name,
-        builder: (context, state) => const CourseDetailPage(),
-      ),
+      // GoRoute(
+      //   path: '/detail',
+      //   name: CourseDetailPage.name,
+      //   builder: (context, state) => const CourseDetailPage(curso),
+      // ),
       GoRoute(
         path: '/panelcourse',
         name: PanelCoursePage.name,

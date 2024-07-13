@@ -1,10 +1,37 @@
-class Curso {
-  final String nombre;
-  final String imagenurl;
-  final String profesor;
+import 'package:aprendiendoflutter/domain/entities/user/user.dart';
 
-  Curso(
-      {required this.nombre,
-      required this.imagenurl,
-      required this.profesor});
+class Course {
+  final int id;
+  final int idTeacher;
+  final String name;
+  final String banner;
+  final String category;
+  final String? resume;
+  final String? language;
+  final String? filesCount;
+  final double? rating;
+  final double? price;
+  final double? discount;
+  final String? benefits;
+  final String? targetPublic;
+  final String? description;
+  final User? teacher;
+
+  Course({
+    required this.id,
+    required this.idTeacher,
+    required this.name,
+    required this.banner,
+    required this.category,
+    this.resume,
+    this.language,
+    this.filesCount,
+    this.rating,
+    this.price,
+    this.discount,
+    this.benefits,
+    this.targetPublic,
+    this.description,
+    this.teacher,
+  });
 }

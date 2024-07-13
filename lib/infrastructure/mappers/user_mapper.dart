@@ -7,6 +7,7 @@ class UserMapper {
       type: json['type'],
       lastName: json['lastName'],
       email: json['email'],
+      password: json['password'],
       phone: json['phone'],
       secondEmail: json['secondEmail'],
       college: json['college'],

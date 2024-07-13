@@ -1,11 +1,14 @@
+import 'package:aprendiendoflutter/domain/entities/curso/curso_model.dart';
+import 'package:aprendiendoflutter/presentation/screens/home/curso_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CourseDetailPage extends StatelessWidget {
+class CourseDetailPage extends ConsumerWidget {
   static const String name = 'course_detail_screen';
-
-  const CourseDetailPage({super.key});
+  final Course curso;
+  const CourseDetailPage(this.curso, {super.key});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colors = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -34,19 +37,17 @@ class CourseDetailPage extends StatelessWidget {
                 borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),
-                child: Image.asset(
-                  'assets/images/illustrator.png',
+                child: Image.network(
+                  curso.banner,
                   fit: BoxFit
                       .cover, // Ajusta la imagen para que cubra todo el espacio disponible
                   width: double.infinity,
-                  // Establece el ancho al máximo posible
-                  // Establece la altura al máximo posible
                 ),
               ),
             ),
             const SizedBox(height: 20.0),
-            const Text(
-              'Adobe Ilustrator desde cero hasta intermedio',
+            Text(
+              curso.name,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 24.0,
@@ -1122,6 +1123,9 @@ class CourseDetailPage extends StatelessWidget {
                         FilledButton(
                           onPressed: () {
                             // Aquí puedes añadir tu lógica para agregar el curso a la cesta
+                            ref
+                                .read(cursosCarritoProvider.notifier)
+                                .addCurso(curso);
                             Navigator.of(context)
                                 .pop(); // Cierra el diálogo
                           },
