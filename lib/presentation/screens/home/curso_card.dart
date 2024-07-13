@@ -1,17 +1,22 @@
 import 'package:aprendiendoflutter/domain/entities/curso/curso_model.dart';
+import 'package:aprendiendoflutter/presentation/screens/home/detalle_curso_pagina.dart';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class CursoCard extends StatelessWidget {
-  final Curso curso;
+  final Course curso;
   const CursoCard(this.curso, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push('/detail');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CourseDetailPage(curso),
+          ),
+        );
       },
       child: Container(
         height: 350,
@@ -20,7 +25,7 @@ class CursoCard extends StatelessWidget {
           borderRadius:
               BorderRadius.circular(10.0), // Redondez de los bordes
         ),
-        padding: const EdgeInsets.fromLTRB(10, 10, 10,0),
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Column(
           children: [
             Padding(
@@ -31,7 +36,7 @@ class CursoCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(
                       10.0), // Redondez de los bordes
                   image: DecorationImage(
-                    image: NetworkImage(curso.imagenurl),
+                    image: NetworkImage(curso.banner),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -43,14 +48,13 @@ class CursoCard extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  curso.nombre,
+                  curso.name,
                   style: const TextStyle(
                       color: Colors.white,
                       height: 0.9,
                       fontSize: 20.0,
                       fontWeight: FontWeight.w400,
-                      overflow: TextOverflow.ellipsis
-                  ),
+                      overflow: TextOverflow.ellipsis),
                 ),
               ),
             ),
@@ -67,7 +71,7 @@ class CursoCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                      child: Text(curso.profesor,
+                      child: Text('${curso.idTeacher}',
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15.0,
@@ -103,7 +107,6 @@ class CursoCard extends StatelessWidget {
           ],
         ),
       ),
-      
     );
   }
 }

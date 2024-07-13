@@ -8,7 +8,7 @@ class MisCursosCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 206,
+        height: 375,
         decoration: BoxDecoration(
           color: const Color(0xFF2A2C3E),
           borderRadius:
@@ -17,10 +17,9 @@ class MisCursosCard extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
               child: Container(
-                width: 132,
-                height: 81,
+                height: 150,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
                       10.0), // Redondez de los bordes
@@ -33,67 +32,70 @@ class MisCursosCard extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
               child: Text(
                   'Adobe Photoshop desde cero hasta intermedio',
                   style: TextStyle(
                       color: Colors.white,
                       height: 0.9,
-                      fontSize: 11.0,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.w400)),
             ),
             const Padding(
-                padding: EdgeInsets.fromLTRB(8, 4, 0, 8),
+                padding: EdgeInsets.fromLTRB(16, 16, 0, 8),
                 child: Row(
                   children: [
                     CircleAvatar(
                       backgroundImage: NetworkImage(
                           'https://googleflutter.com/sample_image.jpg'),
-                      radius: 7,
+                      radius: 18,
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                      padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
                       child: Text('Nombre del autor',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 9.0,
+                              fontSize: 16.0,
                               fontWeight: FontWeight.w400)),
                     ),
                   ],
                 )),
             const SizedBox(
-              width: 185,
+              // Añade un espacio entre los elementos
+              height: 10,
+            ),
+            const SizedBox(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Icon(Icons.description_outlined,
-                      size: 12.0,
+                      size: 16.0,
                       color: Color(
                           0xFF6B6D7F)), // Icono para el número de elementos
 
                   Text('10',
                       style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           color: Color(
                               0xFF6B6D7F))), // Reemplaza '10' con el número de elementos
                   Icon(Icons.gpp_good_outlined,
-                      size: 12.0,
+                      size: 16.0,
                       color: Color(
                           0xFF6B6D7F)), // Icono para el número de elementos completados
 
                   Text('5',
                       style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           color: Color(
                               0xFF6B6D7F))), // Reemplaza '5' con el número de elementos completados
                   Icon(Icons.people,
-                      size: 12.0,
+                      size: 16.0,
                       color: Color(
                           0xFF6B6D7F)), // Icono para el número de personas inscritas
 
                   Text('20k',
                       style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           color: Color(
                               0xFF6B6D7F))), // Reemplaza '20' con el número de personas inscritas
                 ],
@@ -103,9 +105,8 @@ class MisCursosCard extends StatelessWidget {
               width: 10,
             ),
             const SizedBox(
-              width: 160,
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -121,7 +122,7 @@ class MisCursosCard extends StatelessWidget {
                     Text(
                       'Progreso: 65%', // Reemplaza esto con tu porcentaje de progreso actual
                       style: TextStyle(
-                        fontSize: 12.0,
+                        fontSize: 16.0,
                         color: Color(0xFF6B6D7F),
                       ),
                     ),
